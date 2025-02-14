@@ -5,11 +5,12 @@ import {
   uploadVid,
   deleteVid,
 } from "../controller/vidCtrl.js";
+import decodeResourceId from "../utils/decodeResourceId.js";
 
 const vidRouter = Router();
 
 vidRouter.route("/").get(getAllVids).post(uploadVid).put(updateVid);
 
-vidRouter.delete("/:id", deleteVid);
+vidRouter.delete("/:id", decodeResourceId, deleteVid);
 
 export default vidRouter;
