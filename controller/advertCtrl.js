@@ -1,8 +1,15 @@
-export const getAdverts = async (_, res) => {
-  return res.json({
-    route: "Advert",
-    method: "GET",
-  });
+import { where } from "sequelize";
+import { Advert } from "../models/m_adverts.js";
+
+export const getAdverts = async (req, res) => {
+  try {
+    const adverts = await Advert.findAll();
+    const advertsData = adverts.map(({ dataValues }) => dataValues);
+    res.status(200).json(advertsData).end();
+  } catch (e) {
+    console.log(e);
+    res.status(500).json([]);
+  }
 };
 
 export const uploadAdvert = (_, res) => {
